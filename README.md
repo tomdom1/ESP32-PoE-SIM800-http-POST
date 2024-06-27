@@ -81,7 +81,7 @@ Host: <IP_ESP32>
 - HTTPServer.h i HTTPServer.cpp - files for handling the HTTP server.
 
 ### License
-This project is licensed under the terms of the MIT license. See the LICENSE file for more information.
+This project is licensed under the terms of the MIT license. See the [LICENSE](https://github.com/tomdom1/ESP32-PoE-SIM800-http-POST/blob/main/LICENSE) file for more information.
 
 If you have any questions or need assistance, open an issue in the GitHub repository or contact me directly.
 
