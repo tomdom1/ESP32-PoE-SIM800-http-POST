@@ -14,7 +14,7 @@ void sim800lSetup() {
     sendATCommand(String("AT+CPIN=") + SIM_PIN, 2000);
     configureBand();
     resetAndConfigureModem();
-    setupGPRS();
+    // setupGPRS();
     checkNetworkConnection();
 }
 
@@ -89,25 +89,25 @@ void configureBand() {
     sendATCommand("AT+CBAND=\"ALL_BAND\"", 2000);
 }
 
-void setupGPRS() {
-    sendATCommand("AT+CGATT=1", 10000);
-    configureAPN();
-}
+// void setupGPRS() {
+//     sendATCommand("AT+CGATT=1", 10000);
+//     configureAPN();
+// }
 
-void configureAPN() {
-    sendATCommand("AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\"", 5000);
-    sendATCommand("AT+SAPBR=3,1,\"APN\",\"internet\"", 5000);
-    sendATCommand("AT+SAPBR=1,1", 5000);
-    sendATCommand("AT+SAPBR=2,1", 5000);
-}
+// void configureAPN() {
+//     sendATCommand("AT+SAPBR=3,1,\"CONTYPE\",\"GPRS\"", 5000);
+//     sendATCommand("AT+SAPBR=3,1,\"APN\",\"internet\"", 5000);
+//     sendATCommand("AT+SAPBR=1,1", 5000);
+//     sendATCommand("AT+SAPBR=2,1", 5000);
+// }
 
-void sendToZabbix(String url) {
-    sendATCommand("AT+HTTPINIT", 5000);
-    sendATCommand("AT+HTTPPARA=\"CID\",1", 5000);
-    sendATCommand("AT+HTTPPARA=\"URL\",\"" + url + "\"", 5000);
-    sendATCommand("AT+HTTPACTION=0", 10000);
-    sendATCommand("AT+HTTPTERM", 5000);
-}
+// void sendToZabbix(String url) {
+//     sendATCommand("AT+HTTPINIT", 5000);
+//     sendATCommand("AT+HTTPPARA=\"CID\",1", 5000);
+//     sendATCommand("AT+HTTPPARA=\"URL\",\"" + url + "\"", 5000);
+//     sendATCommand("AT+HTTPACTION=0", 10000);
+//     sendATCommand("AT+HTTPTERM", 5000);
+// }
 
 
 void checkSMS() {
@@ -151,6 +151,7 @@ void parseSenderNumber(String &smsContent, String &senderNumber) {
 
 
 bool sendSMS(String number, String message) {
+    sendATCommand("AT+CMGF=1", 2000);
     sendATCommand("AT+CMGS=\"" + number + "\"", 2000);
     sim800l.print(message);
     sim800l.write(26);
@@ -177,7 +178,7 @@ void monitorConnection() {
     checkSignalStrength();
     checkSIMStatus();
     
-    if (!isConnected) {
-        setupGPRS();
-    }
+    // if (!isConnected) {
+    //     setupGPRS();
+    // }
 }

@@ -1,7 +1,7 @@
 #include "Network.h"
 
-const char* ssid = "your_ssid_wifi";
-const char* password = "your_pass_wifi";
+const char* ssid = "r2d2";
+const char* password = "conkret425";
 
 void WiFiEvent(WiFiEvent_t event) {
     switch (event) {
